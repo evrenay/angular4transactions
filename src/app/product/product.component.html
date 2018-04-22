@@ -1,0 +1,33 @@
+<h4 class="page-header">Products</h4>
+<div class="dropdown-divider"></div>
+<div *ngIf="filterText">
+  You searched for <strong>{{ filterText }}</strong>
+</div>
+<div>
+  <input class="form-control" type="text" placeholder=" type something..." [(ngModel)]=" filterText " >
+</div>
+<div>
+  <ul class="list-group">
+    <li *ngFor="let product of products |productFilter: filterText|slice:((pager.currentPage-1)*pager.pageSize):((pager.currentPage-1)*pager.pageSize)+pager.pageSize" class="list-group-item ">
+
+        <button (click)="addToCart(product)" class="btn btn-primary btn-sm float-right"  >
+
+            <i class="material-icons align-middle">&#xE145;</i><span class="align-middle">add to cart</span>
+
+         </button>
+
+      <h5><strong>{{product.productName | uppercase}}</strong></h5>
+      <p>{{product.quantityPerUnit}}</p>
+      <h6>{{product.unitPrice | currency: 'USD': true}} ( KDV DAHİL : {{product.unitPrice | vatAdded | currency: 'USD': true }} )</h6>
+    </li>
+  </ul>
+</div>
+
+  <nav aria-label="Page Navigation">
+  <ul class="pagination flex-md-wrap">
+    <li class="page-item" *ngFor="let page of pager.pageList" [class.active]="page==pager.currentPage">
+      <a class="page-link" style="cursor:pointer;" (click)="setPage(page)">{{page}}</a>
+    </li>
+  </ul>
+</nav>
+

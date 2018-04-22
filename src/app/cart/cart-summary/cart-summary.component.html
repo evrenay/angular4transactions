@@ -1,0 +1,26 @@
+<ul *ngIf="cartItems.length>0;else cartEmptyContent" class="navbar-nav navbar-right" xmlns="http://www.w3.org/1999/html">
+  <li class="nav-item dropdown">
+    <a class="dropdown-toggle" id="navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="material-icons align-middle">&#xE854;</i> <span class="align-middle">Your cart :{{totalCartItemPrice | currency: 'USD' :true}}({{totalCartItem}})</span>
+    </a>
+
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li><a class="dropdown-item" *ngFor="let item of cartItems" ><i (click)="removeFromCart(item.product)" class="material-icons align-middle btn btn-outline-danger btn-sm">&#xE16C;</i><span class="align-middle"> {{item.product.productName | uppercase}}({{item.quantity}})</span></a></li>
+        <div class="dropdown-divider"></div>
+        <li class="text-center" ><strong><a class="dropdown-item-text" routerLink="my-cart">Go to cart</a></strong></li>
+      </ul>
+
+
+  </li>
+</ul>
+<ng-template #cartEmptyContent>
+  <ul class="navbar-nav navbar-right" xmlns="http://www.w3.org/1999/html">
+    <li class="nav-item dropdown">
+      <a class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons align-middle">&#xE854;</i> <span class="align-middle">cart is empty</span>
+      </a>
+
+
+    </li>
+  </ul>
+</ng-template>
